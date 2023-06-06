@@ -1,0 +1,29 @@
+import { headers } from 'next/headers';
+import Stories from '~/ui/pages/Stories';
+import { CrystallizeAPI } from '~/use-cases/crystallize/read';
+import { getContext } from '~/use-cases/http/utils';
+import { getStoreFront } from '~/use-cases/storefront.server';
+import { CategoryWithChildren } from '~/use-cases/contracts/Category';
+
+async function getData() {
+    const requestContext = getContext({
+        url: 'https://furniture.superfast.local/en',
+        headers: headers(),
+    });
+
+    const path = `/stories`;
+    const { secret } = await getStoreFront(requestContext.host);
+    const api = CrystallizeAPI({
+        apiClient: secret.apiClient,
+        language: requestContext.language,
+    });
+
+    const folder = await api.fetchFolderWithChildren(path, []);
+
+    return folder;
+}
+
+export default async () => {
+    const folder = await getData();
+    return <Stories folder={folder as CategoryWithChildren} />;
+};
