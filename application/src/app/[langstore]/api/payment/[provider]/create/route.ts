@@ -8,6 +8,7 @@ import { default as initiateQuickpayPayment } from '~/use-cases/payments/quickpa
 import { default as initiateRazorPayPayment } from '~/use-cases/payments/razorpay/initiatePayment';
 import { default as initiateMontonioPayPayment } from '~/use-cases/payments/montonio/initiatePayment';
 import { default as initiateAdyenPayment } from '~/use-cases/payments/adyen/initiatePayment';
+import { default as initiateVippsPayment } from '~/use-cases/payments/vipps/initiatePayment';
 
 export async function POST(request: Request, params: { provider: string }) {
     const requestContext = getContext(request);
@@ -28,6 +29,7 @@ export async function POST(request: Request, params: { provider: string }) {
         razorpay: initiateRazorPayPayment,
         montonio: initiateMontonioPayPayment,
         adyen: initiateAdyenPayment,
+        vipps: initiateVippsPayment,
     };
 
     // @ts-ignore

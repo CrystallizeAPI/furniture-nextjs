@@ -32,5 +32,7 @@ export async function POST(request: Request) {
         // isGuest: !isAuthenticated,
     };
 
-    return NextResponse.json(await handlePlaceCart(storefront.apiClient, requestContext, { ...body, user }, customer));
+    return NextResponse.json(
+        await handlePlaceCart(storefront.config, storefront.apiClient, requestContext, { ...body, user }, customer),
+    );
 }

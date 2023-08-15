@@ -11,5 +11,7 @@ export async function POST(request: Request) {
     //TODO: Add authentication
     const user = {};
 
-    return NextResponse.json(await handleCart(storefront.apiClient, requestContext, { ...body, user }));
+    return NextResponse.json(
+        await handleCart(storefront.config, storefront.apiClient, requestContext, { ...body, user }),
+    );
 }
