@@ -26,6 +26,29 @@ async function getData({ params }: { params: { shop: string; langstore: string }
     return data;
 }
 
+export async function generateMetadata() {
+    const requestContext = getContext({
+        url: 'https://furniture.superfast.local/en',
+        headers: headers(),
+    });
+
+    const path = `/shop`;
+    const { secret } = await getStoreFront(requestContext.host);
+    const api = CrystallizeAPI({
+        apiClient: secret.apiClient,
+        language: requestContext.language,
+    });
+    const metadata = await api.fetchMetadata(path);
+    return {
+        title: metadata?.title,
+        openGraph: {
+            title: metadata?.title,
+            description: metadata?.description,
+            images: [metadata?.image],
+        },
+    };
+}
+
 export default async ({ params }: { params: { shop: string; langstore: string } }) => {
     const data = await getData({ params });
     return <ShopPage shop={data} />;

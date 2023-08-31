@@ -32,6 +32,7 @@ async function getData() {
         data,
     };
 }
+
 export default async () => {
     const { data } = await getData();
 

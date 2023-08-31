@@ -23,7 +23,31 @@ async function getData() {
     return folder;
 }
 
+export async function generateMetadata() {
+    const requestContext = getContext({
+        url: 'https://furniture.superfast.local/en',
+        headers: headers(),
+    });
+
+    const path = `/stories`;
+    const { secret } = await getStoreFront(requestContext.host);
+    const api = CrystallizeAPI({
+        apiClient: secret.apiClient,
+        language: requestContext.language,
+    });
+    const metadata = await api.fetchMetadata(path);
+    return {
+        title: metadata?.title,
+        openGraph: {
+            title: metadata?.title,
+            description: metadata?.description,
+            images: [metadata?.image],
+        },
+    };
+}
+
 export default async () => {
     const folder = await getData();
+
     return <Stories folder={folder as CategoryWithChildren} />;
 };

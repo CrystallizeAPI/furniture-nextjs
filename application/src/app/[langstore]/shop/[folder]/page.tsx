@@ -21,7 +21,6 @@ async function getData({
 }: {
     params: {
         [x: string]: any;
-        slug: string;
     };
     searchParams?: any;
 }) {
@@ -69,6 +68,29 @@ async function getData({
         category,
         products,
         priceRangeAndAttributes,
+    };
+}
+
+export async function generateMetadata({ params }: { params: { folder: string } }) {
+    const requestContext = getContext({
+        url: 'https://furniture.superfast.local/en',
+        headers: headers(),
+    });
+
+    const path = `/shop/${params.folder}`;
+    const { secret } = await getStoreFront(requestContext.host);
+    const api = CrystallizeAPI({
+        apiClient: secret.apiClient,
+        language: requestContext.language,
+    });
+    const metadata = await api.fetchMetadata(path);
+    return {
+        title: metadata?.title,
+        openGraph: {
+            title: metadata?.title,
+            description: metadata?.description,
+            images: [metadata?.image],
+        },
     };
 }
 
