@@ -39,9 +39,8 @@ async function getData({ params }: { params: { page: string[] } }) {
     const path = '/' + params.page.join('/');
     const crystallizePath = path.replace('.pdf', '');
 
-    const map = await api.fetchTreeMap();
-    const mappedKey = Object.keys(map).find((key: string) => key === crystallizePath);
-    if (!mappedKey) {
+    const shapeIdentifier = await api.fetchShapeIdentifier(path);
+    if (!shapeIdentifier) {
         throw new Response('Not Found', {
             status: 404,
         });
@@ -50,7 +49,6 @@ async function getData({ params }: { params: { page: string[] } }) {
     //Todo: get user from request
     //const user = await authenticatedUser(request);
     const user: [] = [];
-    const shapeIdentifier = map[mappedKey as keyof typeof map]?.shape?.identifier || '_topic';
     const data = await dataFetcherForShapePage(shapeIdentifier, path, requestContext, params, user);
 
     return {
