@@ -39,7 +39,9 @@ async function getData({ params }: { params: { page: string[] } }) {
     const path = '/' + params.page.join('/');
     const crystallizePath = path.replace('.pdf', '');
 
-    const shapeIdentifier = await api.fetchShapeIdentifier(path);
+    const shapeData = await api.fetchShapeIdentifier(path);
+    const shapeIdentifier = shapeData?.shape?.identifier || '_topic';
+
     if (!shapeIdentifier) {
         throw new Response('Not Found', {
             status: 404,
