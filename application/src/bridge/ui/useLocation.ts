@@ -1,5 +1,8 @@
-import { useRouter as useLocation } from 'next/navigation';
+import { useRouter as useLocation, usePathname } from 'next/navigation';
 
 export default () => {
-    return useLocation();
+    return {
+        pathname: usePathname(),
+        useLocation,
+    };
 };

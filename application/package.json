@@ -28,6 +28,7 @@
         "@splidejs/react-splide": "^0.7.12",
         "@stripe/react-stripe-js": "^1.16.1",
         "@stripe/stripe-js": "^1.46.0",
+        "cookie": "^0.6.0",
         "encoding": "^0.1.13",
         "isbot": "^3.6.5",
         "jsonwebtoken": "^9",
@@ -50,6 +51,7 @@
     "devDependencies": {
         "@playwright/test": "^1.28.1",
         "@tailwindcss/line-clamp": "^0.4.2",
+        "@types/cookie": "^0.5.4",
         "@types/jsonwebtoken": "^9",
         "@types/mjml": "^4.7.0",
         "@types/node": "^18.11.15",
