@@ -20,7 +20,3 @@ export async function POST(request: Request) {
 
     return NextResponse.json(data);
 }
-
-export async function GET(request: Request, params: { provider: string }) {
-    return NextResponse.json({ message: 'Razorpay Verification Endpoint' });
-}
