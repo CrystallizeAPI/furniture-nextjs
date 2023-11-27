@@ -1,14 +1,30 @@
-import { NextResponse } from 'next/server';
 import { getContext } from '~/use-cases/http/utils';
-import { getStoreFront } from '~/use-cases/storefront.server';
+import handleMagickLink from '~/use-cases/user/handleMagickLink';
 
-export async function POST(request: Request) {
+import { serialize } from 'cookie';
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request, { params }: { params: { token: string } }) {
     const requestContext = getContext(request);
-    const { secret: storefront } = await getStoreFront(requestContext.host);
-    const body: any = await request.json();
-    //authentication needs to be implemented
-    return NextResponse.json({
-        body,
-        status: 200,
+
+    const { redirectUrl, cookie } = await handleMagickLink(
+        requestContext.baseUrl,
+        requestContext,
+
+        params.token,
+    );
+
+    return new Response(null, {
+        status: 302,
+        headers: {
+            Location: redirectUrl,
+            'Set-Cookie': serialize('authentication', JSON.stringify(cookie), {
+                path: '/',
+                httpOnly: true,
+                secure: true,
+                sameSite: 'lax',
+                maxAge: 604_800,
+            }),
+        },
     });
 }

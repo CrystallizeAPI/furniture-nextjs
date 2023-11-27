@@ -11,7 +11,6 @@ async function getData({ searchParams }: { searchParams: { q: string } }) {
     });
     const { secret } = await getStoreFront(requestContext.host);
     const param = searchParams.q;
-    console.log(param);
     const api = CrystallizeAPI({
         apiClient: secret.apiClient,
         language: requestContext.language,

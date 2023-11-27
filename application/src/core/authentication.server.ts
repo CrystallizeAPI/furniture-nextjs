@@ -1,13 +1,11 @@
-import { authCookie } from './cookies';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import cookie from 'cookie';
 
-export async function authenticate(request: Request): Promise<{ user: any } | undefined> {
+export async function authenticate(authCookie: any): Promise<{ user: any } | undefined> {
     const unauthorized = (code: number) => {
         throw new Error('Unauthorized. Error code: ' + code);
     };
-    const cookieHeader = request.headers.get('Cookie');
-    const authenticationCookie = cookie.parse(cookieHeader || '') || {};
+
+    const authenticationCookie = JSON.parse(authCookie.value) || {};
 
     const token = authenticationCookie.jwt;
     if (token === undefined) {
@@ -37,7 +35,7 @@ export async function authenticatedUser(request: Request): Promise<any> {
     }
 }
 
-export async function isAuthenticated(request: Request): Promise<boolean> {
+export async function isAuthenticated(request: any) {
     try {
         await authenticate(request);
         return true;
