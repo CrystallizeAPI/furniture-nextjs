@@ -12,11 +12,7 @@ import { headers } from 'next/headers';
 import { Providers } from '~/bridge/ui/Providers';
 import { Header } from '~/ui/components/layout/header';
 import { Footer } from '~/ui/components/layout/footer';
-
-// pick the tailwind config file you want to use and update the config file
-import '~/styles/tailwind.default.css';
-// import '~/styles/tailwind.dark.css';
-// import '~/styles/tailwind.rainbow.css';
+import '~/styles/tailwind.css';
 
 async function getData() {
     const requestContext = getContext({
@@ -69,13 +65,9 @@ export default async ({ children }: { children: React.ReactNode }) => {
                 <meta name="viewport" content="width=device-width,initial-scale=1" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="mobile-web-app-capable" content="yes" />
-                {/* <Favicons /> */}
-                {/* <link rel="manifest" href="/manifest.json" /> */}
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff" />
                 <link href={`${baseUrl}${path}`} rel="canonical" />
-                {/* <Meta /> */}
-                {/* <Links /> */}
                 {displayableLanguages.map((lang) => (
                     <link
                         key={lang.code}

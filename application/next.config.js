@@ -8,7 +8,6 @@ const nextConfig = {
     },
     reactStrictMode: true,
     experimental: {
-        appDir: true,
         serverComponentsExternalPackages: ['mjml'],
     },
     async redirects() {
