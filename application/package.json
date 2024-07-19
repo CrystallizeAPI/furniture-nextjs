@@ -13,8 +13,8 @@
     },
     "dependencies": {
         "@adyen/adyen-web": "^5.36.0",
-        "@crystallize/js-api-client": "^1.12.2",
-        "@crystallize/js-storefrontaware-utils": "^2.0.0",
+        "@crystallize/js-api-client": "^3.0.0",
+        "@crystallize/js-storefrontaware-utils": "^3.0.0",
         "@crystallize/node-service-api-request-handlers": "^4.2.0",
         "@crystallize/reactjs-components": "^2.0.0",
         "@crystallize/reactjs-hooks": "^0.8",
@@ -25,6 +25,7 @@
         "@splidejs/react-splide": "^0.7.12",
         "@stripe/react-stripe-js": "^1.16.1",
         "@stripe/stripe-js": "^1.46.0",
+        "json-to-graphql-query": "^2.2.5",
         "cookie": "^0.6.0",
         "encoding": "^0.1.13",
         "isbot": "^3.6.5",

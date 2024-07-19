@@ -27,12 +27,11 @@ export async function POST(request: Request) {
         // then we decide of and customerIdentifier
         customerIdentifier,
         isGuest: true,
-
-        // TODO: this is a temporary fix, we need to find a better way to handle this
-        // isGuest: !isAuthenticated,
     };
 
     return NextResponse.json(
-        await handlePlaceCart(storefront.config, storefront.apiClient, requestContext, { ...body, user }, customer),
+        await handlePlaceCart({ ...body, user }, customer, {
+            apiClient: storefront.apiClient,
+        }),
     );
 }

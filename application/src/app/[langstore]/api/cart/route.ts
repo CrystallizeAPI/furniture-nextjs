@@ -8,10 +8,9 @@ export async function POST(request: Request) {
     const { secret: storefront } = await getStoreFront(requestContext.host);
     const body = await request.json();
 
-    //TODO: Add authentication
-    const user = {};
-
     return NextResponse.json(
-        await handleCart(storefront.config, storefront.apiClient, requestContext, { ...body, user }),
+        await handleCart(body, {
+            apiClient: storefront.apiClient,
+        }),
     );
 }

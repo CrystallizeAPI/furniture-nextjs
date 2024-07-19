@@ -1,9 +1,9 @@
 import { createOrderFetcher } from '@crystallize/js-api-client';
-import { CartWrapper, handleOrderRequestPayload } from '@crystallize/node-service-api-request-handlers';
+import { handleOrderRequestPayload } from '@crystallize/node-service-api-request-handlers';
 import { getContext } from '~/use-cases/http/utils';
 import { getStoreFront } from '~/use-cases/storefront.server';
-import { cartWrapperRepository } from '~/use-cases/services.server';
 import { NextResponse } from 'next/server';
+import { fetchCart } from '~/use-cases/crystallize/read/fetchCart';
 
 export async function GET(request: Request, params: { id: string }) {
     //@ts-expect-error
@@ -13,7 +13,9 @@ export async function GET(request: Request, params: { id: string }) {
     const auth: any = {};
     let cartId = requestContext.url.searchParams.get('cartId');
 
-    let cartWrapper: CartWrapper | null | undefined = cartId ? await cartWrapperRepository.find(cartId) : null;
+    let cart = await fetchCart(cartId!, {
+        apiClient: storefront.apiClient,
+    });
 
     try {
         const order = await handleOrderRequestPayload(null, {

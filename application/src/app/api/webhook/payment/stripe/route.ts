@@ -1,7 +1,6 @@
 import { getContext } from '~/use-cases/http/utils';
 import { getStoreFront } from '~/use-cases/storefront.server';
 import receivePaymentEvent from '~/use-cases/payments/stripe/receivePaymentEvent';
-import { cartWrapperRepository } from '~/use-cases/services.server';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
@@ -9,7 +8,6 @@ export async function POST(request: Request) {
     const { secret: storefront } = await getStoreFront(requestContext.host);
     const body = await request.json();
     const data = await receivePaymentEvent(
-        cartWrapperRepository,
         storefront.apiClient,
         request.headers.get('stripe-signature') as string,
         body,
