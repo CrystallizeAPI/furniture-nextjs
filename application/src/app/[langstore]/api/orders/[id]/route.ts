@@ -3,7 +3,6 @@ import { handleOrderRequestPayload } from '@crystallize/node-service-api-request
 import { getContext } from '~/use-cases/http/utils';
 import { getStoreFront } from '~/use-cases/storefront.server';
 import { NextResponse } from 'next/server';
-import { fetchCart } from '~/use-cases/crystallize/read/fetchCart';
 
 export async function GET(request: Request, params: { id: string }) {
     //@ts-expect-error
@@ -11,12 +10,6 @@ export async function GET(request: Request, params: { id: string }) {
     const requestContext = getContext(request);
     const { secret: storefront } = await getStoreFront(requestContext.host);
     const auth: any = {};
-    let cartId = requestContext.url.searchParams.get('cartId');
-
-    let cart = await fetchCart(cartId!, {
-        apiClient: storefront.apiClient,
-    });
-
     try {
         const order = await handleOrderRequestPayload(null, {
             fetcherById: createOrderFetcher(storefront.apiClient).byId,
