@@ -352,7 +352,7 @@ figcaption {
 }
 .cart-item img {
     width: 54px;
-    height: auto;
+    height: 50px;
     border-radius: 6px;
 }
 ::-webkit-scrollbar {
