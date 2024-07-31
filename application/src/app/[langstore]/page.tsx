@@ -10,7 +10,7 @@ import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 async function getData() {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en`,
         headers: headers(),
     });
     if (!isValidLanguageMarket(requestContext.language, requestContext.market)) {

@@ -19,7 +19,7 @@ async function getData({
     };
 }) {
     const requestContext = getContext({
-        url: `https://furniture.superfast.local/en/shop/${params.folder}/${params.product}`,
+        url: `${process.env.APP_URL}/en/shop/${params.folder}/${params.product}`,
         headers: headers(),
     });
     const path = `/shop/${params.folder}/${params.product}`;
@@ -29,7 +29,7 @@ async function getData({
 
 export async function generateMetadata({ params }: { params: { [x: string]: any } }) {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en`,
         headers: headers(),
     });
 

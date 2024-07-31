@@ -4,9 +4,8 @@ import fetchPickupPoints from '~/use-cases/payments/montonio/fetchPickupPoints';
 import { storage } from '~/use-cases/services.server';
 import { getStoreFront } from '~/use-cases/storefront.server';
 
-export async function GET(request: Request, params: { provider: string }) {
-    //@ts-expect-error
-    if (params.params.provider !== 'montonio') {
+export async function GET(request: Request, { params }: { params: { provider: string } }) {
+    if (params.provider !== 'montonio') {
         return NextResponse.json({ error: 'Provider not supported' }, { status: 400 });
     }
     const cached = await storage.get('montonio-pickup-points');

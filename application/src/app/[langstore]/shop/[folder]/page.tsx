@@ -25,12 +25,10 @@ async function getData({
     searchParams?: any;
 }) {
     const requestContext = getContext({
-        url: `https://furniture.superfast.local/en/shop/${params.folder}`,
+        url: `${process.env.APP_URL}/en/shop/${params.folder}`,
         headers: headers(),
     });
-    if (!isValidLanguageMarket(requestContext.language, requestContext.market)) {
-        // HOW?
-    }
+
     const path = `/shop/${params.folder}`;
     const { secret } = await getStoreFront(requestContext.host);
 
@@ -73,7 +71,7 @@ async function getData({
 
 export async function generateMetadata({ params }: { params: { folder: string } }) {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en`,
         headers: headers(),
     });
 

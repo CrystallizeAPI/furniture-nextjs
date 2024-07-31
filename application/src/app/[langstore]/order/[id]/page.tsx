@@ -4,7 +4,7 @@ import { getContext } from '~/use-cases/http/utils';
 
 async function getData({ params, searchParams }: { params: { id: string }; searchParams: string }) {
     const requestContext = getContext({
-        url: `https://furniture.superfast.local/en/search`,
+        url: `${process.env.APP_URL}/en/order/${params.id}`,
         headers: headers(),
     });
 

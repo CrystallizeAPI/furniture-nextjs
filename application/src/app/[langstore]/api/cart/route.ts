@@ -9,8 +9,12 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     return NextResponse.json(
-        await handleCart(body, {
-            apiClient: storefront.apiClient,
-        }),
+        await handleCart(
+            body,
+            {
+                apiClient: storefront.apiClient,
+            },
+            [],
+        ),
     );
 }

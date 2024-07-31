@@ -23,12 +23,9 @@ type TProduct = {
 
 async function getData({ params }: { params: { page: string[] } }) {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en`,
         headers: headers(),
     });
-    if (!isValidLanguageMarket(requestContext.language, requestContext.market)) {
-        // HOW?
-    }
 
     const { secret } = await getStoreFront(requestContext.host);
     const api = CrystallizeAPI({

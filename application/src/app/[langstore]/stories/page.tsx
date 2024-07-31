@@ -7,7 +7,7 @@ import { CategoryWithChildren } from '~/use-cases/contracts/Category';
 
 async function getData() {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en/stories`,
         headers: headers(),
     });
 
@@ -25,7 +25,7 @@ async function getData() {
 
 export async function generateMetadata() {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en/stories`,
         headers: headers(),
     });
 

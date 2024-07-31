@@ -2,14 +2,12 @@ import { NextResponse } from 'next/server';
 import { getContext } from '~/use-cases/http/utils';
 import { getStoreFront } from '~/use-cases/storefront.server';
 import initiateBuyNowPayment from '~/use-cases/payments/vipps/initiateBuyNowPayment';
-import { v4 as uuidv4 } from 'uuid';
 import handlePlaceCart from '~/use-cases/checkout/handlePlaceCart';
 import { fetchOrderIntent } from '~/use-cases/crystallize/read/fetchOrderIntent';
 import orderIntentToPaymentCart from '~/use-cases/mapper/API/orderIntentToPaymentCart';
 
-export async function POST(request: Request, params: { provider: string }) {
-    //@ts-expect-error
-    if (params.params.provider !== 'vipps') {
+export async function POST(request: Request, { params }: { params: { provider: string } }) {
+    if (params.provider !== 'vipps') {
         return NextResponse.json({ error: 'Provider not supported' }, { status: 400 });
     }
     const requestContext = getContext(request);

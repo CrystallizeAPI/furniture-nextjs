@@ -4,9 +4,8 @@ import { getContext } from '~/use-cases/http/utils';
 import { getStoreFront } from '~/use-cases/storefront.server';
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request, params: { id: string }) {
-    //@ts-expect-error
-    let orderId = params.params.id;
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+    let orderId = params.id;
     const requestContext = getContext(request);
     const { secret: storefront } = await getStoreFront(requestContext.host);
     const auth: any = {};

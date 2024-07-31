@@ -14,7 +14,7 @@ async function getData({
     };
 }) {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en/stories/${params.story}`,
         headers: headers(),
     });
     const path = `/stories/${params.story}`;
@@ -26,7 +26,7 @@ async function getData({
 
 export async function generateMetadata({ params }: { params: { story: string } }) {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en/stories/${params.story}`,
         headers: headers(),
     });
 

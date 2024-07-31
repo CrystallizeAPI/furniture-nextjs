@@ -16,13 +16,10 @@ import '~/styles/tailwind.css';
 
 async function getData() {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en`,
         headers: headers(),
     });
 
-    if (!isValidLanguageMarket(requestContext.language, requestContext.market)) {
-        // HOW?
-    }
     const { shared, secret } = await getStoreFront(requestContext.host);
     const api = CrystallizeAPI({
         apiClient: secret.apiClient,

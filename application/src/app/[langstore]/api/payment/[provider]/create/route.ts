@@ -12,7 +12,7 @@ import { default as initiateDinteroPayment } from '~/use-cases/payments/dintero/
 import { fetchOrderIntent } from '~/use-cases/crystallize/read/fetchOrderIntent';
 import orderIntentToPaymentCart from '~/use-cases/mapper/API/orderIntentToPaymentCart';
 
-export async function POST(request: Request, params: { provider: string }) {
+export async function POST(request: Request, { params }: { params: { provider: string } }) {
     const requestContext = getContext(request);
     const { secret: storefront } = await getStoreFront(requestContext.host);
     const body = await request.json();
@@ -40,10 +40,12 @@ export async function POST(request: Request, params: { provider: string }) {
     };
 
     try {
-        const data = await providers[
-            // @ts-expect-error
-            params.params.provider as keyof typeof providers
-        ](paymentCart, requestContext, body, storefront.config);
+        const data = await providers[params.provider as keyof typeof providers](
+            paymentCart,
+            requestContext,
+            body,
+            storefront.config,
+        );
         return NextResponse.json(data);
     } catch (error) {
         console.error(error);

@@ -8,7 +8,7 @@ import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 async function getData({ params }: { params: { shop: string; langstore: string } }) {
     const requestContext = getContext({
-        url: `https://furniture.superfast.local/${params.langstore}/shop`,
+        url: `${process.env.APP_URL}/${params.langstore}/shop`,
         headers: headers(),
     });
     if (!isValidLanguageMarket(requestContext.language, requestContext.market)) {
@@ -28,7 +28,7 @@ async function getData({ params }: { params: { shop: string; langstore: string }
 
 export async function generateMetadata() {
     const requestContext = getContext({
-        url: 'https://furniture.superfast.local/en',
+        url: `${process.env.APP_URL}/en`,
         headers: headers(),
     });
 

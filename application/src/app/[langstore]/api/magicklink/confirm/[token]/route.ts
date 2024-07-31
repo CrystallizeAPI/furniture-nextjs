@@ -2,7 +2,6 @@ import { getContext } from '~/use-cases/http/utils';
 import handleMagickLink from '~/use-cases/user/handleMagickLink';
 
 import { serialize } from 'cookie';
-import { NextResponse } from 'next/server';
 
 export async function GET(request: Request, { params }: { params: { token: string } }) {
     const requestContext = getContext(request);

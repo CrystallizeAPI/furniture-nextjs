@@ -6,7 +6,7 @@ import { getStoreFront } from '~/use-cases/storefront.server';
 
 async function getData({ searchParams }: { searchParams: { q: string } }) {
     const requestContext = getContext({
-        url: `https://furniture.superfast.local/en/search`,
+        url: `${process.env.APP_URL}/en/search`,
         headers: headers(),
     });
     const { secret } = await getStoreFront(requestContext.host);
