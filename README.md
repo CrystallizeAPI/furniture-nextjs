@@ -1,5 +1,8 @@
 # Crystallize - NextJS - Boilerplate
 
+> **Warning**
+> This boilerplate is deprecated, check out [this Next.js eCommerce Accelerator](https://github.com/CrystallizeAPI/nextjs-furnitut) instead
+
 The furniture boilerplate is a fully-featured eCommerce boilerplate built using Next.js and Crystallize.
 
 > **Note**  
